@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -83,13 +84,12 @@ public class FragmentList extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(ViewHolder holder, final int position) {
             holder.tvTitle.setText(datas.get(position).getTitle());
             holder.tvDescription.setText(datas.get(position).getDescription());
 
             Glide.with(context)
                     .load(datas.get(position).getPoster())
-                    .fitCenter()
                     .into(holder.ivPoster);
             final View view = holder.view;
             view.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +99,11 @@ public class FragmentList extends Fragment {
                     animator.addListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
+                            Intent intent = new Intent(context,DetailActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("data",datas.get(position));
+                            intent.putExtras(bundle);
+                            context.startActivity(intent);
 //                            mContext.startActivity(new Intent(mContext, DetailActivity.class));
                         }
                     });
