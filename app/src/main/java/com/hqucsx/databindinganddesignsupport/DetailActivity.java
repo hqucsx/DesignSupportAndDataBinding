@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -28,6 +30,8 @@ public class DetailActivity extends AppCompatActivity {
     CoordinatorLayout clContent;
     @InjectView(R.id.iv_poster)
     ImageView ivPoster;
+    @InjectView(R.id.fb_test)
+    FloatingActionButton fbTest;
 
     private Data data;
 
@@ -48,6 +52,17 @@ public class DetailActivity extends AppCompatActivity {
                 .centerCrop()
                 .into(ivPoster);
 
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
